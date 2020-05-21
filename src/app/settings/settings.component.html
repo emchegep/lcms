@@ -1,0 +1,38 @@
+<h3 class="text-muted">Reset Password</h3>
+<hr>
+<div class="row">
+  <div class="col-lg-6 col-md-6">
+    <div *ngIf="success">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p>Password changed successfully Successfully. Thank you</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <form [formGroup]="resetPasswordForm">
+      <div class="form-group mb-1">
+        <label>New Password</label>
+        <input type="password" class="form-control" formControlName="password" [class.is-invalid]="password.invalid && password.touched">
+      </div>
+      <div *ngIf="password.invalid && password.touched">
+        <small class="text-danger" *ngIf="password.errors?.required">password is required</small>
+        <small class="text-danger" *ngIf="password.errors?.minlength">Password Should have Atleast 6 characters</small>
+      </div>
+      <div class="form-group mb-1">
+        <label>Re-enter Password</label>
+        <input type="password" class="form-control" formControlName="confirm_password"  [class.is-invalid]="resetPasswordForm.errors?.misMatch">
+      </div>
+      <div>
+        <small class="text-danger" *ngIf="resetPasswordForm.errors?.misMatch">Password do not match</small>
+      </div>
+      <div class="form-group mt-3">
+        <button type="button" class="btn btn-primary" (click)="onChangePassword(resetPasswordForm.value)" [disabled]="resetPasswordForm.invalid">Change</button>
+      </div>
+    </form>
+  </div>
+</div>

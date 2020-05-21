@@ -1,0 +1,19 @@
+<h3 class="text-uppercase text-muted">Defendants</h3>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Phone</th>
+    <th>Address</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let defendant of myCase.defendant" class="text-capitalize">
+    <td>{{defendant.first_name}} {{defendant.middle_name}} {{defendant.last_name}}</td>
+    <td>{{defendant.gender}}</td>
+    <td>{{defendant.phone}}</td>
+    <td>{{defendant.address}}</td>
+  </tr>
+  </tbody>
+</table>

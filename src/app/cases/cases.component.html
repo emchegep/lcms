@@ -1,0 +1,30 @@
+<h4 class="text-muted text-uppercase"><span class="fa fa-server"></span> Cases in Progress</h4>
+<table class="table bg-light table-hover">
+  <thead>
+  <tr class="text-muted">
+    <th>Case Type</th>
+    <th>Case Description</th>
+    <th>Claimant</th>
+    <th>Court Station</th>
+    <th>Court Level</th>
+    <th>Court No.</th>
+    <th>Date Filed</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let mycase of cases">
+    <td>{{mycase.case.case_type}}</td>
+    <td>{{mycase.case.case_description}}</td>
+    <td>{{mycase.name.first_name}} {{mycase.name.middle_name}} {{mycase.name.last_name}}</td>
+    <td>{{mycase.case.court.station}}</td>
+    <td>{{mycase.case.court.level}}</td>
+    <td>{{mycase.case.court.court_no}}</td>
+    <td>{{mycase.created_date | date}}</td>
+    <td>
+      <button class="btn btn-primary btn-sm" (click)="onSelect(mycase)">Update</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

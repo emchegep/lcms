@@ -1,0 +1,77 @@
+<div class="row mb-2">
+  <div class="col-md-4 offset-md-8 col-sm-12 col-xs-12">
+  <form [formGroup]="searchForm">
+    <div class="input-group">
+      <input type="text" class="form-control search-input text-dark" placeholder="Search case..." formControlName="phone">
+      <button type="button" class="btn btn-light search-button" (click)="onSearchCase(searchForm.value)"><span class="fa fa-search text-danger"></span> </button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="row" *ngIf="success; else nocase">
+  <div class="col-md-12">
+    <table class="table bg-light table-striped" id="print-section">
+      <thead>
+      <tr>
+        <th colspan="2">Claimants Details</th>
+        <th colspan="2">Case Details</th>
+      </tr><br><br>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Full Name:</strong></td>
+        <td>{{searchedCase[0].name.first_name}} {{searchedCase[0].name.middle_name}} {{searchedCase[0].name.last_name}}</td>
+        <td><strong>Case Type:</strong></td>
+        <td>{{searchedCase[0].case.case_type}} </td>
+      </tr>
+      <tr>
+        <td><strong>Mobile:</strong></td>
+        <td>{{searchedCase[0].phone}}</td>
+        <td><strong>Case Description:</strong></td>
+        <td>{{searchedCase[0].case.case_description}} </td>
+      </tr>
+      <tr>
+        <td><strong>Email:</strong></td>
+        <td>{{searchedCase[0].email}}</td>
+        <td><strong>Case Description:</strong></td>
+        <td>{{searchedCase[0].case.case_description}} </td>
+      </tr>
+      <tr>
+        <td><strong>County:</strong></td>
+        <td>{{searchedCase[0].resident.county}}</td>
+        <td><strong>Defendant:</strong></td>
+        <td>{{searchedCase[0].defendant.first_name}} {{searchedCase[0].defendant.middle_name}} {{searchedCase[0].defendant.last_name}}</td>
+      </tr>
+      <tr>
+        <td><strong>Sub-county:</strong></td>
+        <td>{{searchedCase[0].resident.sub_county}}</td>
+        <td><strong>Witness:</strong></td>
+        <td>{{searchedCase[0].witness.first_name}} {{searchedCase[0].witness.middle_name}} {{searchedCase[0].witness.last_name}}</td>
+      </tr>
+      <tr>
+        <td><strong>Town:</strong></td>
+        <td>{{searchedCase[0].resident.town}}</td>
+        <td><strong>Lawyer:</strong></td>
+        <td>{{searchedCase[0].lawyer.first_name}} {{searchedCase[0].lawyer.middle_name}} {{searchedCase[0].lawyer.last_name}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="3">
+          <button class="btn btn-primary btn-sm" (click)="onSelect(searchedCase[0])">Update</button>
+        </td>
+        <td>
+          <button printTitle="LEGAL CASE MANAGEMENT SYSTEM" printSectionId="print-section" class="btn btn-primary btn-sm mb-2" ngxPrint>Print</button>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<ng-template #nocase>
+<div class="row">
+  <div class="col-md-12">
+    <h4>{{message.message}}</h4>
+  </div>
+</div>
+</ng-template>

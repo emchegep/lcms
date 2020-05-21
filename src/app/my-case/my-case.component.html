@@ -1,0 +1,22 @@
+<h3 class="text-uppercase text-muted">Case Details</h3>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Case Type</th>
+    <th>Case Description</th>
+    <th>Court Level</th>
+    <th>Court Station</th>
+    <th>Court No.</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-capitalize">
+    <td>{{myCase.case.case_type}} case</td>
+    <td>{{myCase.case.case_description}}</td>
+    <td>{{myCase.case.court.level}}</td>
+    <td>{{myCase.case.court.station}}</td>
+    <td>{{myCase.case.court.court_no}}</td>
+  </tr>
+  </tbody>
+</table>
+

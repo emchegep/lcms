@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-between">
+  <h4 class="text-muted text-uppercase"><span class="fa fa-users"></span> Claimants</h4>
+  <div class="">
+    <button printTitle="LEGAL CASE MANAGEMENT SYSTEM" printSectionId="print-section" class="btn btn-primary btn-sm mb-2 mr-3" ngxPrint>Save Pdf</button>
+    <button printTitle="LEGAL CASE MANAGEMENT SYSTEM" printSectionId="print-section" class="btn btn-primary btn-sm mb-2" ngxPrint>Print</button>
+  </div>
+</div>
+<div id="print-section">
+<table class="table bg-light table-striped">
+  <thead>
+  <tr class="text-muted">
+    <th>Name</th>
+    <th>Phone</th>
+    <th>County</th>
+    <th>Sub County</th>
+    <th>Town</th>
+    <th>Case</th>
+    <th>Date Filed</th>
+    <th>court Station</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let claimant of claimants">
+    <td class="text-uppercase">{{claimant.name.first_name}} {{claimant.name.middle_name}} {{claimant.name.last_name}}</td>
+    <td>{{claimant.phone}}</td>
+    <td>{{claimant.resident.county}}</td>
+    <td>{{claimant.resident.sub_county}}</td>
+    <td>{{claimant.resident.town}}</td>
+    <td>{{claimant.case.case_description}}</td>
+    <td>{{claimant.created_date | date}}</td>
+    <td>{{claimant.case.court.station}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,60 @@
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="card pt-1">
+      <div class="card-body pb-1">
+        <h5 class="text-muted">Case Progress</h5>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div *ngIf="success">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p>Case Progress Added Successfully. Thank you</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="progressForm">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group mb-1">
+                <label>Select Next Stage</label>
+                <select class="form-control" formControlName="stage"  [class.is-invalid]="stage.invalid && stage.touched">
+                  <option value="pre-trial" selected>Pre-Trial</option>
+                  <option value="mention">Mention</option>
+                  <option value="hearing">Hearing</option>
+                  <option value="ruling">Ruling</option>
+                </select>
+              </div>
+              <div *ngIf="stage.invalid && stage.touched">
+                <small class="text-danger" *ngIf="stage.errors?.required">Please select stage</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group mb-1">
+                <label>Date</label>
+                <input type="date" class="form-control" formControlName="date"  [class.is-invalid]="date.invalid && date.touched">
+              </div>
+              <div *ngIf="date.invalid && date.touched">
+                <small class="text-danger" *ngIf="address.errors?.required">Please select date</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <button type="button" class="btn btn-success btn-sm" [disabled]="progressForm.invalid" (click)="onAddCaseProgress(progressForm.value)">Save</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

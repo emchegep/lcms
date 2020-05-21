@@ -1,0 +1,48 @@
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="card pt-1">
+      <div class="card-body pb-1">
+        <h5 class="text-muted">Close Case File</h5>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div *ngIf="success">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p>Case File Closed Successfully. Thank you</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="closeFileForm">
+          <div class="row">
+            <div class="col-md-4">
+              <input type="hidden" formControlName="status" value="false">
+              <div class="form-group mb-1">
+                <label>Judgement Description</label>
+                <textarea class="form-control" rows="5" class="form-control" formControlName="judgement"  [class.is-invalid]="judgement.invalid && judgement.touched"></textarea>
+              </div>
+              <div *ngIf="judgement.invalid && judgement.touched">
+                <small class="text-danger" *ngIf="judgement.errors?.required">Enter judgement description</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <button type="button" class="btn btn-success btn-sm" [disabled]="closeFileForm.invalid" (click)="onAddCloseFile(closeFileForm.value)">Save</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

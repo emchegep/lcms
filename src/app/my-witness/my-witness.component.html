@@ -1,0 +1,19 @@
+<h3 class="text-uppercase text-muted">witnesses</h3>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Phone</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let witness of myCase.witness" class="text-capitalize">
+    <td>{{witness.first_name}} {{witness.middle_name}} {{witness.last_name}}</td>
+    <td>{{witness.gender}}</td>
+    <td>{{witness.phone}}</td>
+
+  </tr>
+  </tbody>
+</table>
+

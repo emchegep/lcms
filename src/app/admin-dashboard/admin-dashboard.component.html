@@ -1,0 +1,174 @@
+<!--navbar-->
+<nav class="navbar navbar-expand-md navbar-light">
+  <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#mynavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mynavbar">
+    <div class="container-fluid">
+      <div class="row">
+        <!--sidebar-->
+        <div class="col-lg-2 col-md-3 sidebar fixed-top">
+          <a href="#" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Legal Case System</a>
+          <div class="bottom-border pb-3">
+            <img src="../../assets/images/admin.png" width="50" class="rounded-circle mr-3">
+            <a href="#" class="text-white">{{currentUser.first_name}} {{currentUser.last_name}}</a>
+          </div>
+          <ul class="navbar-nav flex-column mt-4">
+            <li class="nav-item" style="cursor: pointer"><a (click)="showDashboard()" class="nav-link text-white p-3 mb-2 current"><i class="fa fa-home text-light fa-lg mr-3"></i> Dashboard</a></li>
+            <li class="nav-item" style="cursor: pointer"><a  (click)="showProfile()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-user text-light fa-lg mr-3"></i> Search Case</a></li>
+            <li class="nav-item" style="cursor: pointer"><a (click)="showCaseApplication()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-envelope text-light fa-lg mr-3"></i> Case Application</a></li>
+            <li class="nav-item" style="cursor: pointer"><a (click)="showClaimants()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-users text-light fa-lg mr-3"></i> Claimants</a></li>
+            <li class="nav-item" style="cursor: pointer"><a (click)="showCases()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-server text-light fa-lg mr-3"></i> Cases in Progress</a></li>
+            <li class="nav-item" style="cursor: pointer"><a (click)="showClosedCases()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-server text-light fa-lg mr-3"></i> Cases Closed</a></li>
+            <li class="nav-item" style="cursor: pointer"><a (click)="showAdminResetPassword()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-wrench text-light fa-lg mr-3"></i> Reset Password</a></li>
+            <li class="nav-item" style="cursor: pointer;"><a (click)="showNewUser()" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fa fa-plus text-light fa-lg mr-3"></i> Add New Staff</a></li>
+          </ul>
+        </div>
+        <!--end of sidebar-->
+        <!--top nav-->
+        <div class="col-lg-10 col-md-9 ml-auto bg-dark fixed-top py-2 top-navbar">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="text-white mb-0">ADMIN DASHBOARD</h4>
+            </div>
+            <div class="col-md-4">
+              <form [formGroup]="searchForm">
+                <div class="input-group">
+                  <input type="text" class="form-control search-input text-white" placeholder="Search LCMS..." formControlName="phone">
+                  <button type="button" class="btn btn-light search-button" (click)="onSearchCase(searchForm.value)"><span class="fa fa-search text-danger"></span> </button>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-5">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a href="#" class="nav-link"><span class="fa fa-comments text-muted"></span> </a> </li>
+                <li class="nav-item"><a href="#" class="nav-link"><span class="fa fa-bell text-muted"></span> </a> </li>
+                <li class="nav-item"><a href="#" class="nav-link"><span class="fa fa-facebook text-primary"></span> </a> </li>
+                <li class="nav-item"><a href="#" class="nav-link"><span class="fa fa-twitter text-info"></span> </a> </li>
+                <li class="nav-item ml-md-auto"><a href="#" class="nav-link"> <span class="text-light"> Logged In as </span> <span class="text-white"> {{currentUser.email}} </span></a> </li>
+                <li class="nav-item ml-md-auto"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out"   title="sign out"><span class="fa fa-sign-out text-danger"></span> </a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--end of top nav-->
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- end of navbar-->
+<!-- modal-->
+<div class="modal fade" id="sign-out" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+     <h4 class="modal-title">want to leave?</h4>
+     <button type="button" class="close" data-dismiss="modal">&times;</button>
+   </div>
+    <div class="modal-body">
+      <p>Press logout to leave</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="authService.logOut()">Logout</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- end of modal-->
+<!-- cards-->
+<section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10 col-md-9 ml-auto">
+          <div class="row pt-md-5 mt-md-2">
+            <div class="col-lg-3 col-sm-6 p-2">
+              <div class="card card-common">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <span class="fa fa-users fa-3x text-primary"></span>
+                    <div class="text-right text-secondary">
+                      <h6><a (click)="claimantsCard()" style="cursor: pointer">Total Claimants</a></h6>
+                      <h4>{{totalClaimants[0].total_claimants}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-secondary">
+                  <i class="fa fa-refresh mr-3"></i>
+                  <span>Updated Now</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 p-2">
+              <div class="card card-common">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <span class="fa fa-book fa-3x text-warning"></span>
+                    <div class="text-right text-secondary">
+                      <h6><a (click)="casesCard()" style="cursor: pointer">Cases in Progress</a></h6>
+                      <h4>{{totalClaimants[0].total_claimants}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-secondary">
+                  <i class="fa fa-refresh mr-3"></i>
+                  <span>Updated Now</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 p-2">
+              <div class="card card-common">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <span class="fa fa-server fa-3x text-success"></span>
+                    <div class="text-right text-secondary">
+                      <h6>cases closed</h6>
+                      <h4>{{totalClosed[0].total_closed}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-secondary">
+                  <i class="fa fa-refresh mr-3"></i>
+                  <span>Updated Now</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 p-2">
+              <div class="card card-common">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <span class="fa fa-users fa-3x text-warning"></span>
+                    <div class="text-right text-secondary">
+                      <h6>Total Claimants</h6>
+                      <h4>{{totalClaimants[0].total_claimants}}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-secondary">
+                  <i class="fa fa-refresh mr-3"></i>
+                  <span>Updated Now</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<!-- end of cards-->
+
+<!--content-->
+<section>
+  <div class="container-fluid">
+    <div class="row mb-5">
+      <div class="col-lg-10 col-md-9 ml-auto">
+       <div class="row bottom-border">
+         <div class="col-lg-12 col-md-12">
+           <router-outlet></router-outlet>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--end of content-->
